@@ -1,73 +1,75 @@
 
 <div class="container">
 
-  <div class="row">
-    <div class="col-lg-4 col-md-6 col-sm-12">
-      <mat-form-field @Inp class="example-full-width" (keyup)="keyFunc($event)">
-        <mat-label>Nombre</mat-label>
-        <input type="text" matInput
-               placeholder="Nombre" [(ngModel)]="FiltroName">
-      </mat-form-field>
+  <div class="card m-3">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <mat-form-field @Inp class="example-full-width" (keyup)="keyFuncName($event)">
+            <mat-label>Nombre</mat-label>
+            <input type="text" matInput
+                   placeholder="Nombre" [(ngModel)]="FiltroName">
+          </mat-form-field>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <mat-form-field class="example-full-width" (keyup)="keyFuncType($event)">
+            <mat-label>Type</mat-label>
+            <input type="text" matInput
+                   placeholder="Type" [(ngModel)]="FiltroType">
+          </mat-form-field>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <mat-form-field class="example-full-width" (keyup)="keyFuncDimension($event)">
+            <mat-label>dimension</mat-label>
+            <input type="text" matInput
+                   placeholder="dimension" [(ngModel)]="FiltroDimension">
+          </mat-form-field>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class=" col-sm-12">
+
+          <table mat-table [dataSource]="dataSource1" class="mat-elevation-z8">
+
+            <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef> No. </th>
+              <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> name </th>
+              <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="type">
+              <th mat-header-cell *matHeaderCellDef> type </th>
+              <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="dimension">
+              <th mat-header-cell *matHeaderCellDef> dimension </th>
+              <td mat-cell *matCellDef="let element"> {{element.dimension}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+          <mat-paginator [pageSizeOptions]="[12,24,36]" showFirstLastButtons></mat-paginator>
+        </div>
+
+      </div>
     </div>
-    <div class="col-lg-4 col-md-6 col-sm-12">
-      <mat-form-field class="example-full-width">
-        <mat-label>Type</mat-label>
-        <input type="text" matInput
-               placeholder="Type">
-      </mat-form-field>
-    </div>
-    <div class="col-lg-4 col-md-6 col-sm-12">
-      <mat-form-field class="example-full-width">
-        <mat-label>dimension</mat-label>
-        <input type="text" matInput
-               placeholder="dimension">
-      </mat-form-field>
-    </div>
-
-
-
-
-
-
-
   </div>
-  <div class="row">
-    <br>
-    <table mat-table [dataSource]="dataSource1" class="mat-elevation-z8">
 
-      <!--- Note that these columns can be defined in any order.
-            The actual rendered columns are set as a property on the row definition" -->
 
-      <!-- Position Column -->
-      <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef> No. </th>
-        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-      </ng-container>
-
-      <!-- Name Column -->
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> name </th>
-        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-      </ng-container>
-
-      <!-- Weight Column -->
-      <ng-container matColumnDef="type">
-        <th mat-header-cell *matHeaderCellDef> type </th>
-        <td mat-cell *matCellDef="let element"> {{element.type}} </td>
-      </ng-container>
-
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="dimension">
-        <th mat-header-cell *matHeaderCellDef> dimension </th>
-        <td mat-cell *matCellDef="let element"> {{element.dimension}} </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-    <mat-paginator [pageSizeOptions]="[12,24,36]" showFirstLastButtons></mat-paginator>
-
-  </div>
 
 
 </div>

@@ -20,6 +20,8 @@ export class InicioComponent implements OnInit {
 
   listResul:Result[]=[];
   FiltroName:string="";
+  FiltroType:string="";
+  FiltroDimension:string="";
 
   displayedColumns: string[] = ['id', 'name', 'type', 'dimension'];
    dataSource1 =new MatTableDataSource<Result>(); //ELEMENT_DATA;
@@ -32,20 +34,49 @@ export class InicioComponent implements OnInit {
 
   ngOnInit() {
 
+    this.getData();
+
+
+
+  }
+  getData(){
     this.persoService.GetPersonajes()
       .subscribe(resp =>{
-        // this.listResul=resp.results;
+
         this.listResul=resp.results;
-        this.dataSource1=new MatTableDataSource(resp.results);
-        this.dataSource1.paginator = this.paginator;
+
+        if (this.FiltroName.length>0){
+          this.listResul=this.listResul.filter( (x1) => x1.name.toUpperCase().includes(this.FiltroName.toUpperCase()) ) ;
+        }
+        if (this.FiltroType.length>0){
+          this.listResul=this.listResul.filter( (x1) => x1.type.toLowerCase().includes(this.FiltroType.toLowerCase()) ) ;
+        }
+        if (this.FiltroDimension.length>0){
+          this.listResul=this.listResul.filter( (x1) => x1.dimension.toLowerCase().includes(this.FiltroDimension.toLowerCase()) ) ;
+        }
+
+        this.dataSource1=new MatTableDataSource( this.listResul);
+
+         this.dataSource1.paginator = this.paginator;
       })
+  }
+
+
+
+  keyFuncName(inpvalue:any){
+
+    this.getData();
 
   }
 
-  keyFunc(inpvalue:any){
 
-    this.listResul=this.listResul.filter( (x1) => x1.name.includes(this.FiltroName) ) ;
-    this.dataSource1=new MatTableDataSource( this.listResul);
+
+  keyFuncType(inpvalue:any){
+    this.getData();
+
+  }
+  keyFuncDimension(inpvalue:any){
+    this.getData();
 
   }
 
